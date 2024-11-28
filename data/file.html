@@ -1,0 +1,159 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <title>I Love You</title>
+
+    <style>
+        h1 {
+            color: #6bb4e8;
+            font-size: 70px;
+            font-family: "Kohinoor Devanagari", sans-serif;
+            background-color: rgba(6, 10, 21, 0.75);
+            text-align: center;
+            color: #67addf; /* Основной цвет */
+            text-shadow:
+                    0 0 5px #99fffc,
+                    0 0 10px #9de5f5,
+                    0 0 20px #ffffff,
+                    0 0 40px #6cdcff,
+                    0 0 80px #4993f3;
+            animation: glow 2s infinite alternate;
+        }
+
+        h2 {
+            color: #613ce1;
+            font-size: 70px;
+            font-family: "Kohinoor Devanagari", sans-serif;
+            background-color: rgba(6, 10, 21, 0.75);
+            text-align: center;
+            color: #5e3ad8; /* Основной цвет */
+            text-shadow:
+                    0 0 5px #c299ff,
+                    0 0 10px #c57bff,
+                    0 0 20px #ffffff,
+                    0 0 40px #a980ff,
+                    0 0 80px #aa5dfd;
+            animation: glow 2s infinite alternate;
+        }
+
+        h3 {
+            color: #ffb238;
+            font-size: 70px;
+            font-family: "Kohinoor Devanagari", sans-serif;
+            background-color: rgba(4, 8, 20, 0.75);
+            text-align: center;
+            color: #f4aa38; /* Основной цвет */
+            text-shadow:
+                    0 0 5px #ff9,
+                    0 0 10px #ff9,
+                    0 0 20px #ff9,
+                    0 0 40px #ffc,
+                    0 0 80px #ffc;
+            animation: glow 2s infinite alternate;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Message For You</h1>
+    <h2>You are gay</h2>
+    <h3>And I love you <3 </h3>
+
+    <img src="https://i.pinimg.com/736x/42/bc/0f/42bc0f70ab443ba6e75bbfc065f73a74.jpg">
+    <script>
+        var audio = new Audio('https://www.soundjay.com/button/beep-07.wav');
+        audio.play();
+        wiggle();
+        function wiggle() {
+            var elements = document.querySelectorAll('h1,h2,h3');
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.transform = 'rotate(' + (Math.random() - 0.5) * 2 + 'deg)';
+            }
+            setTimeout(wiggle, 100);
+
+        }
+    </script>
+    <script>
+        const canvas = document.createElement("canvas");
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext("2d");
+
+        canvas.style.position = "fixed";
+        canvas.style.top = 0;
+        canvas.style.left = 0;
+        canvas.style.pointerEvents = "none"; // Чтобы не мешать кликам
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 100;
+        const maxSize = 3;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * maxSize + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.opacity = Math.random();
+                this.fade = Math.random() * 0.02 + 0.01;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+
+                this.opacity += this.fade;
+                if (this.opacity > 1 || this.opacity < 0) this.fade *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 223, 0, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        initParticles();
+        animate();
+    </script>
+
+</body>
+
+</html>
